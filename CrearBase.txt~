@@ -1,0 +1,16 @@
+
+CREATE TABLE Usuarios(id_usuario INTEGER NOT NULL, usuario VARCHAR2(20) NOT NULL, contrasena VARCHAR2(30) NOT NULL, PRIMARY KEY (id_usuario))
+
+CREATE TABLE Proveedores(id_proveedor INTEGER NOT NULL,	nombre_proveedor VARCHAR2(30) NOT NULL,	direccion_proveedor VARCHAR2(50) NULL , telefono INTEGER NULL, ciudad VARCHAR2(30) NULL, PRIMARY KEY (id_proveedor))
+
+CREATE TABLE Ingredientes(id_ingrediente INTEGER NOT NULL, nombre_ingrediente VARCHAR2(30) NULL, exitencia_inventario FLOAT NULL, costo_compra FLOAT NULL, id_proveedor INTEGER NULL, PRIMARY KEY (id_ingrediente), FOREIGN KEY (id_proveedor) REFERENCES Proveedores (id_proveedor) ON DELETE SET NULL)
+
+CREATE TABLE Producto(id_producto INTEGER NOT NULL , nombre VARCHAR2(20) NULL , precio_unitario FLOAT NULL , PRIMARY KEY (id_producto))
+
+CREATE TABLE Recetas(id_receta INTEGER NOT NULL , id_producto INTEGER NULL , tiempo_coccion INTEGER NULL , cantidad_echa INTEGER NULL , PRIMARY KEY (id_receta), FOREIGN KEY (id_producto) REFERENCES Producto (id_producto) ON DELETE SET NULL)
+
+CREATE TABLE Ingredientes_Recetas(id_ingrediente INTEGER NOT NULL , id_receta INTEGER NOT NULL , cantidad_ingrediente FLOAT NULL , PRIMARY KEY (id_ingrediente,id_receta), FOREIGN KEY (id_ingrediente) REFERENCES Ingredientes (id_ingrediente), FOREIGN KEY (id_receta) REFERENCES Recetas (id_receta))
+
+CREATE TABLE Pedidos(id_pedido INTEGER NOT NULL , id_producto INTEGER NULL , cantidad_producto INTEGER NULL , fecha_pedido DATE NULL , total FLOAT NULL , fecha_entrega DATE NULL , PRIMARY KEY (id_pedido), FOREIGN KEY (id_producto) REFERENCES Producto (id_producto) ON DELETE SET NULL)
+
+CREATE TABLE Ordenes_Ingredientes(id_orden INTEGER NOT NULL , id_proveedor INTEGER NULL , id_ingrediente INTEGER NULL , cantidad FLOAT NULL , fecha_pedido DATE NULL , total_compra FLOAT NULL , PRIMARY KEY (id_orden), FOREIGN KEY (id_proveedor) REFERENCES Proveedores (id_proveedor) ON DELETE SET NULL, FOREIGN KEY (id_ingrediente) REFERENCES Ingredientes (id_ingrediente) ON DELETE SET NULL)
