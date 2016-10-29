@@ -1,5 +1,6 @@
 
-create user CoffeeTreeP identified by abcd1234
+create user CoffeeTreePz identified by abcd1234
 
+grant connect to CoffeeTreePz 
 
-grant all privileges to CoffeeTreeP identified by abcd1234
+grant all privileges to CoffeeTreePz identified by abcd1234
