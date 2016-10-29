@@ -9,9 +9,10 @@ import java.math.BigDecimal;
 public class Receta {
     public static final String ing_id = "ingrediente_id";
     public static final String cant_r = "cant";
-    
+    public static final String nombre = "nombre";
     private BigDecimal cant;
     private BigDecimal ingrediente_id;
+    private String nombre_ingrediente;
     
     private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
 
@@ -36,6 +37,15 @@ public class Receta {
         this.cant = cant;
         propertyChangeSupport.firePropertyChange(cant_r, oldId_producto, cant);
     }
+    public String getNombre() {
+        return nombre_ingrediente;
+    }
+
     
+    public void setNombre(String nombre_producto) {
+        java.lang.String oldNombre_ingrediente = this.nombre_ingrediente;
+        this.nombre_ingrediente = nombre_producto;
+        propertyChangeSupport.firePropertyChange(nombre, oldNombre_ingrediente, nombre_producto);
+    }
     
 }

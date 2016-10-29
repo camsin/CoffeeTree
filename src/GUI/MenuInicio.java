@@ -35,7 +35,7 @@ public class MenuInicio extends javax.swing.JFrame {
         mod = (DefaultTableModel)this.model.getModel();
         //Cantidades disponibles de los ingredientes
         cantidades_reg = (DefaultTableModel)this.tableCant_Disp.getModel();
-        List<Ingredientes> ing= new ArrayList<>();
+       
         cant_disp = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select cant_Disp,nombre from Ingredientes", Ingrediente.class);;
         largo = cant_disp.size();
         int l=0;
