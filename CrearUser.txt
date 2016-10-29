@@ -1,6 +1,5 @@
 
 create user CoffeeTreeP identified by abcd1234
 
-grant connect to CoffeeTreeP 
 
 grant all privileges to CoffeeTreeP identified by abcd1234
