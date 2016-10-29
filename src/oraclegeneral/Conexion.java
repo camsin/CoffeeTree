@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
     private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static  String usuario ="CoffeeTreePz";
+    private static  String usuario ="CoffeeTreePT";
     private static String contrasena = "abcd1234";
     private static Connection con;
     private static Statement st;
@@ -50,8 +50,8 @@ public class Conexion {
                     + "Porfavor, ingrese la contraseña para el usuario \"System\" \n" 
                     + "Asi se podra instalar la base de datos :D");
         File file = new File("CrearUser.txt");
-        usuario = "CoffeeTreeP";
-        contrasena = JOptionPane.showInputDialog("Introduzca la contraseña del usuario CoffeeTreeP");
+        usuario = "system";
+        contrasena = JOptionPane.showInputDialog("Introduzca la contraseña del usuario system");
         try {
             FileReader in =  new FileReader(file.getAbsolutePath());
             BufferedReader br = new BufferedReader(in);
@@ -78,7 +78,7 @@ public class Conexion {
     
     public static Boolean creacionBase(){
         FileReader fstream = null;
-        usuario = "CoffeeTreePz";
+        usuario = "CoffeeTreePT";
         contrasena = "abcd1234";
          File file = new File("CrearBase.txt");
         try {
