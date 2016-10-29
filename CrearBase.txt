@@ -1,4 +1,4 @@
-
+﻿
 CREATE TABLE ingredientes(ingrediente_id INTEGER NOT NULL ,nombre VARCHAR2(30),cant_disp FLOAT,fecha_ped DATE,PRIMARY KEY (ingrediente_id))
 
 CREATE TABLE usuarios(usuario_id INTEGER NOT NULL ,contrasena VARCHAR2(8),rol VARCHAR2(13),PRIMARY KEY (usuario_id))
@@ -35,7 +35,7 @@ INSERT INTO usuarios(usuario_id,contrasena,rol) VALUES(1, '123', 'Administrador'
 
 INSERT INTO usuarios(usuario_id,contrasena,rol) VALUES(2, '321', 'Cajero')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(1, 'Cafe', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(1, 'Cafe', 10000,  (select to_date(sysdate,'dd-mm-yyyy') from dual))
 
 INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(2, 'Leche', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
 
