@@ -17,6 +17,7 @@ public class Administrar extends javax.swing.JFrame {
         btnCon_vent = new javax.swing.JButton();
         btnMod_Inv = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        btnBd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -57,7 +58,16 @@ public class Administrar extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/administrar.jpg"))); // NOI18N
         jLabel1.setText("jLabel1");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(0, 0, 1124, 723);
+        jLabel1.setBounds(0, 0, 1127, 725);
+
+        btnBd.setText("CRUD");
+        btnBd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBd);
+        btnBd.setBounds(113, 450, 380, 260);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -78,6 +88,11 @@ public class Administrar extends javax.swing.JFrame {
         InventarioNo in = new InventarioNo();
         in.setVisible(true);
     }//GEN-LAST:event_btnCon_ventActionPerformed
+
+    private void btnBdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBdActionPerformed
+        InventarioMod im = new InventarioMod();
+        im.setVisible(true);
+    }//GEN-LAST:event_btnBdActionPerformed
 
     public static void main(String args[]) {
         
@@ -113,6 +128,7 @@ public class Administrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
+    private javax.swing.JButton btnBd;
     private javax.swing.JButton btnCon_vent;
     private javax.swing.JButton btnMod_Inv;
     private javax.swing.JLabel jLabel1;
