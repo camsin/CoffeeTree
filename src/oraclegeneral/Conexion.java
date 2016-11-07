@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class Conexion {
     private static final String url = "jdbc:oracle:thin:@localhost:1521:XE";
-    private static  String usuario ="CoffeeTreePT";
+    private static  String usuario ="CoffeeTreePT1";
     private static String contrasena = "abcd1234";
     private static Connection con;
     private static Statement st;
@@ -78,7 +78,7 @@ public class Conexion {
     
     public static Boolean creacionBase(){
         FileReader fstream = null;
-        usuario = "CoffeeTreePT";
+        usuario = "CoffeeTreePT1";
         contrasena = "abcd1234";
          File file = new File("CrearBase.txt");
         try {

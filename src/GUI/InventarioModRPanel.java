@@ -7,7 +7,6 @@ package GUI;
 
 import java.awt.EventQueue;
 import java.beans.Beans;
-import javax.persistence.RollbackException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 //
@@ -16,9 +15,14 @@ import controladores.Productos;
 import controladores.Recetas;
 import datos.Ingrediente;
 import datos.Receta;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import oraclegeneral.Conexion;
 
@@ -31,7 +35,10 @@ public class InventarioModRPanel extends JPanel {
     
     private List<Productos> prod = new ArrayList<Productos>();
     private List<Ingrediente> ingrediente = new ArrayList<Ingrediente>();
+    private List<Ingrediente> ing = new ArrayList<Ingrediente>();
     private List<Receta> cant = new ArrayList<Receta>();
+    
+     private List<Ingrediente> med = new ArrayList<Ingrediente>();
     DefaultTableModel mod;
     DefaultTableModel cantidades_reg;
     
@@ -39,9 +46,62 @@ public class InventarioModRPanel extends JPanel {
     public InventarioModRPanel() {
         initComponents();
         cargarProductos();
+        cargarIngredientes();
+        Medidas();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
         }
+        int[] anchos = {300,50,50};
+        for(int i = 0;i<tblRecetas.getColumnCount(); i++) {
+        tblRecetas.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
+        }
+        newButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(false);
+        saveButton.setEnabled(false); 
+        
+        
+
+txtCant.addKeyListener(new KeyAdapter() {
+
+@Override
+public void keyTyped(KeyEvent e) {
+char c = e.getKeyChar();
+if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_DELETE)&& (c != '.')) {
+e.consume();
+}
+if (c == '.' && txtCant.getText().contains(".")) {
+e.consume();
+}
+}
+});
+tblRecetas.setDefaultEditor(Object.class, null);
+cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+tblRecetas.addMouseListener(new MouseAdapter() {
+
+    
+public void mouseClicked(MouseEvent evento) { 
+int fil = tblRecetas.getSelectedRow();
+String in = tblRecetas.getValueAt(fil, 0).toString();
+if(btnCancelar.isEnabled()){
+
+}else{
+for(int i=0;i<lstIngredientes.getItemCount();i++){
+        lstIngredientes.setSelectedIndex(i);
+        if(in.equals(lstIngredientes.getSelectedItem().toString())){
+        lstIngredientes.setSelectedIndex(i);
+        i=lstIngredientes.getItemCount();
+        }
+    
+    }
+    lstIngredientes.setEnabled(false);
+    txtCant.setText(tblRecetas.getValueAt(tblRecetas.getSelectedRow(),1).toString());
+}
+}
+
+});
+                
     }
 
     /**
@@ -60,20 +120,19 @@ public class InventarioModRPanel extends JPanel {
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        ingredienteIdLabel = new javax.swing.JLabel();
         nombreLabel = new javax.swing.JLabel();
         cantDispLabel = new javax.swing.JLabel();
-        ingredienteIdField = new javax.swing.JTextField();
-        cantDispField = new javax.swing.JTextField();
+        txtCant = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         lstProductos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRecetas = new javax.swing.JTable();
         btnAceptar = new javax.swing.JButton();
-        lstProductos1 = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        lstIngredientes = new javax.swing.JComboBox<>();
+        ltsMedidas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        btnCancelar = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
@@ -82,38 +141,35 @@ public class InventarioModRPanel extends JPanel {
         saveButton.setText("Guardar");
         saveButton.addActionListener(formListener);
         add(saveButton);
-        saveButton.setBounds(430, 330, 71, 23);
+        saveButton.setBounds(430, 290, 71, 23);
 
         refreshButton.setText("Update");
         refreshButton.addActionListener(formListener);
         add(refreshButton);
-        refreshButton.setBounds(360, 330, 71, 23);
+        refreshButton.setBounds(350, 290, 71, 23);
 
         newButton.setText("Nuevo");
         newButton.addActionListener(formListener);
         add(newButton);
-        newButton.setBounds(200, 330, 71, 23);
+        newButton.setBounds(70, 290, 71, 23);
 
         deleteButton.setText("Borrar");
         deleteButton.addActionListener(formListener);
         add(deleteButton);
-        deleteButton.setBounds(280, 330, 71, 23);
-
-        ingredienteIdLabel.setText("Ingrediente Id:");
-        add(ingredienteIdLabel);
-        ingredienteIdLabel.setBounds(10, 242, 73, 14);
+        deleteButton.setBounds(160, 290, 71, 23);
 
         nombreLabel.setText("Ingrediente:");
         add(nombreLabel);
-        nombreLabel.setBounds(20, 270, 60, 14);
+        nombreLabel.setBounds(50, 250, 60, 14);
 
         cantDispLabel.setText("Cantidad:");
         add(cantDispLabel);
-        cantDispLabel.setBounds(310, 250, 47, 14);
-        add(ingredienteIdField);
-        ingredienteIdField.setBounds(90, 240, 54, 20);
-        add(cantDispField);
-        cantDispField.setBounds(310, 270, 60, 20);
+        cantDispLabel.setBounds(340, 230, 47, 14);
+
+        txtCant.addActionListener(formListener);
+        txtCant.addKeyListener(formListener);
+        add(txtCant);
+        txtCant.setBounds(340, 250, 60, 20);
 
         jLabel1.setText("Producto");
         add(jLabel1);
@@ -132,7 +188,7 @@ public class InventarioModRPanel extends JPanel {
 
             },
             new String [] {
-                "Ingrediente", "Cantidad"
+                "Ingrediente", "Cantidad", "Medida"
             }
         ));
         jScrollPane1.setViewportView(tblRecetas);
@@ -145,22 +201,27 @@ public class InventarioModRPanel extends JPanel {
         add(btnAceptar);
         btnAceptar.setBounds(390, 10, 71, 23);
 
-        lstProductos1.addActionListener(formListener);
-        add(lstProductos1);
-        lstProductos1.setBounds(90, 270, 210, 20);
+        lstIngredientes.addActionListener(formListener);
+        add(lstIngredientes);
+        lstIngredientes.setBounds(120, 250, 210, 20);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        add(jComboBox1);
-        jComboBox1.setBounds(380, 270, 56, 20);
+        ltsMedidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        add(ltsMedidas);
+        ltsMedidas.setBounds(410, 250, 56, 20);
 
-        jLabel3.setText("Medida");
+        jLabel3.setText("Medida:");
         add(jLabel3);
-        jLabel3.setBounds(380, 250, 34, 14);
+        jLabel3.setBounds(410, 230, 40, 14);
+
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(formListener);
+        add(btnCancelar);
+        btnCancelar.setBounds(240, 290, 90, 23);
     }
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.KeyListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             if (evt.getSource() == saveButton) {
@@ -181,8 +242,29 @@ public class InventarioModRPanel extends JPanel {
             else if (evt.getSource() == btnAceptar) {
                 InventarioModRPanel.this.btnAceptarActionPerformed(evt);
             }
-            else if (evt.getSource() == lstProductos1) {
-                InventarioModRPanel.this.lstProductos1ActionPerformed(evt);
+            else if (evt.getSource() == lstIngredientes) {
+                InventarioModRPanel.this.lstIngredientesActionPerformed(evt);
+            }
+            else if (evt.getSource() == btnCancelar) {
+                InventarioModRPanel.this.btnCancelarActionPerformed(evt);
+            }
+            else if (evt.getSource() == txtCant) {
+                InventarioModRPanel.this.txtCantActionPerformed(evt);
+            }
+        }
+
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            if (evt.getSource() == txtCant) {
+                InventarioModRPanel.this.txtCantKeyPressed(evt);
+            }
+        }
+
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+        }
+
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            if (evt.getSource() == txtCant) {
+                InventarioModRPanel.this.txtCantKeyTyped(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -190,50 +272,118 @@ public class InventarioModRPanel extends JPanel {
     
     @SuppressWarnings("unchecked")
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        entityManager.getTransaction().rollback();
-        entityManager.getTransaction().begin();
-        java.util.Collection data = query.getResultList();
-        for (Object entity : data) {
-            entityManager.refresh(entity);
-        }
-        list.clear();
-        list.addAll(data);
+        //seguro?
+        //Recupero un array con la receta
+        // Cuanto el array
+        //Con el tamaño del array existente, borro todas las dependencias que exitian
+        // Luego hago un for con la nueva receta y coloco inserts que toman los datos de la tabla
+        // y creen las nuevas recetas
     }//GEN-LAST:event_refreshButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        int[] selected = tblRecetas.getSelectedRows();
-        List<GUI.Ingredientes> toRemove = new ArrayList<GUI.Ingredientes>(selected.length);
-        for (int idx = 0; idx < selected.length; idx++) {
-            GUI.Ingredientes i = list.get(tblRecetas.convertRowIndexToModel(selected[idx]));
-            toRemove.add(i);
-            entityManager.remove(i);
+        tblRecetas.setDefaultEditor(Object.class, null);
+        cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+        int opc = JOptionPane.showConfirmDialog(null,"¿Seguro?","Alerta",JOptionPane.YES_NO_OPTION);
+        if(opc == JOptionPane.YES_OPTION){
+        if((this.cantidades_reg.getRowCount()!=0)&&(this.tblRecetas.getSelectedRowCount() > 0)){
+        cantidades_reg.removeRow(this.tblRecetas.getSelectedRow());
+       }else{
+       JOptionPane.showMessageDialog(null,"¡¡No hay nada seleccionado!!");
+       }
         }
-        list.removeAll(toRemove);
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void newButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newButtonActionPerformed
-        GUI.Ingredientes i = new GUI.Ingredientes();
-        entityManager.persist(i);
-        list.add(i);
-        int row = list.size() - 1;
-        tblRecetas.setRowSelectionInterval(row, row);
-        tblRecetas.scrollRectToVisible(tblRecetas.getCellRect(row, 0, true));
+        lstIngredientes.setEnabled(true);
+        newButton.setEnabled(false);
+        deleteButton.setEnabled(false);
+        btnCancelar.setEnabled(true);
+        refreshButton.setEnabled(false);
+        saveButton.setEnabled(true);
+        tblRecetas.setDefaultEditor(Object.class, null);
+        cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+        int filas = tblRecetas.getRowCount();
+        cantidades_reg.addRow(new Object[filas]);
+        
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        try {
-            entityManager.getTransaction().commit();
-            entityManager.getTransaction().begin();
-        } catch (RollbackException rex) {
-            rex.printStackTrace();
-            entityManager.getTransaction().begin();
-            List<GUI.Ingredientes> merged = new ArrayList<GUI.Ingredientes>(list.size());
-            for (GUI.Ingredientes i : list) {
-                merged.add(entityManager.merge(i));
-            }
-            list.clear();
-            list.addAll(merged);
+        tblRecetas.setDefaultEditor(Object.class, null);
+        cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+        int fila = cantidades_reg.getRowCount()-1;
+        String in = lstIngredientes.getSelectedItem().toString();
+        int i=0;
+        int bandera=0,k=0;
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
+            k=1;
         }
+        if(k==0){
+        for(i=0;i<fila;i++){
+            cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+            fila = cantidades_reg.getRowCount()-1;
+            System.out.println("valor a:" + cantidades_reg.getValueAt(i, 0).toString());
+            System.out.println("valor a:" + in);
+        if((cantidades_reg.getValueAt(i, 0).toString().equals(in) && btnCancelar.isEnabled())){
+                JOptionPane.showMessageDialog(null,"¡¡El ingrediente ya esta!!\n Cancela y selecciona para modificar");
+                i=fila;
+                bandera = 1;
+                System.out.println("bandera a:" + bandera);
+        }
+        }
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
+            
+        }else{
+        
+        if(btnCancelar.isEnabled()){
+        bandera = 2;
+        
+        lstIngredientes.setEnabled(false);
+        newButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(true);
+        saveButton.setEnabled(true);
+          //Guardar datos en la tabla
+        int filas = tblRecetas.getRowCount()-1;
+        //Nombre de ingrediente
+        cantidades_reg.setValueAt(lstIngredientes.getSelectedItem().toString(),filas,0);
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
+        //Por unidad de medida a la tabla
+        double conv=0;
+        conversion(conv,ltsMedidas.getSelectedItem().toString(),filas);
+        txtCant.setText("");
+        }else{
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
+            k=1;
+        }
+        if(k==0){
+        newButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(true);
+        saveButton.setEnabled(true);
+        double conv=0;
+        int filas = tblRecetas.getSelectedRow();
+        conversion(conv,ltsMedidas.getSelectedItem().toString(),filas);
+        txtCant.setText("");
+        }
+        
+        }
+        
+        }
+        
+        }                  
+        
+        
+       
+     
+        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void lstProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstProductosActionPerformed
@@ -241,39 +391,103 @@ public class InventarioModRPanel extends JPanel {
     }//GEN-LAST:event_lstProductosActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-
+        //Habilitar botones de nuevo y guardar nadamas
+        newButton.setEnabled(true);
+        deleteButton.setEnabled(false);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(false);
+        saveButton.setEnabled(true);
         ingrediente = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select i.nombre from ingredientes i inner join recetas r"
-            + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
-            + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Ingrediente.class);
+                                                                         + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
+                                                                         + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Ingrediente.class);
         cant = (List<Receta>) Recetas.select(Conexion.getDBConexion(), "select r.cant from ingredientes i inner join recetas r"
-            + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
-            + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Receta.class);
-
+                                                                         + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
+                                                                         + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Receta.class);
+        med = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select i.medida from ingredientes i inner join recetas r"
+                                                                         + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
+                                                                         + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Ingrediente.class);
+        
         tblRecetas.setDefaultEditor(Object.class, null);
         cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
         int largoI = ingrediente.size();
         int largoC = cant.size();
+        int largoM = med.size();
         //Lipia la tabla
         int filas = tblRecetas.getRowCount();
         for(int l=0;l<filas;l++){
-            cantidades_reg.removeRow(0);
+        cantidades_reg.removeRow(0);
         }
         for(int l=0;l<largoI;l++){
-            Ingrediente in = (Ingrediente) ingrediente.get(l);
-            cantidades_reg.addRow(new Object[l]);
-            cantidades_reg.setValueAt(in.getNombre(),l,0);
-        }
+             Ingrediente in = (Ingrediente) ingrediente.get(l);
+             cantidades_reg.addRow(new Object[l]);
+             cantidades_reg.setValueAt(in.getNombre(),l,0);
+          }
         for(int l=0;l<largoC;l++){
-            Receta in = (Receta) cant.get(l);
-            cantidades_reg.setValueAt(in.getCant(),l,1);
-        }
+             Receta in = (Receta) cant.get(l);
+             cantidades_reg.setValueAt(in.getCant(),l,1);
+          }
+        for(int l=0;l<largoM;l++){
+             Ingrediente in = (Ingrediente) med.get(l);
+             cantidades_reg.setValueAt(in.getMedida(),l,2);
+          }
+        
 
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    private void lstProductos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstProductos1ActionPerformed
+    private void lstIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstIngredientesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_lstProductos1ActionPerformed
+    }//GEN-LAST:event_lstIngredientesActionPerformed
 
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        newButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(false);
+        saveButton.setEnabled(true);
+        tblRecetas.setDefaultEditor(Object.class, null);
+        cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+        int filas = cantidades_reg.getRowCount();
+        cantidades_reg.removeRow(filas-1);
+        btnCancelar.setEnabled(false);
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void txtCantKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantKeyPressed
+        char caracter = evt.getKeyChar();
+        if(((caracter < '0') || (caracter > '9')) && (caracter != KeyEvent.VK_BACK_SPACE)&& (caracter !='.')){
+         /* lo que deseo colocar aqui es si ya se pulso el caracter (.) el mismo no se pueda repetir*/
+    }
+        evt.consume();
+
+    }//GEN-LAST:event_txtCantKeyPressed
+
+    private void txtCantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCantActionPerformed
+        
+    }//GEN-LAST:event_txtCantActionPerformed
+
+    private void txtCantKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCantKeyTyped
+            
+    char c = evt.getKeyChar();
+if (((c < '0') || (c > '9')) && (c != KeyEvent.VK_BACK_SPACE)
+&& (c != '.')) {
+evt.consume();
+}
+if (c == '.' && txtCant.getText().contains(".")) {
+evt.consume();
+   }
+
+    }//GEN-LAST:event_txtCantKeyTyped
+
+    public void cargarIngredientes(){
+        DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
+        lstIngredientes.setModel(mdlCombo);
+        ing = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select nombre from ingredientes", Ingrediente.class);
+        
+        for(int i=0;i<ing.size();i++){
+            
+            Ingrediente in = (Ingrediente) ing.get(i);
+            mdlCombo.addElement(in.getNombre());
+        }
+    }
     public void cargarProductos(){
         DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
         lstProductos.setModel(mdlCombo);
@@ -282,29 +496,84 @@ public class InventarioModRPanel extends JPanel {
             mdlCombo.addElement(prod.get(i));
         }
     }
+    public void Medidas(){
+        DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
+        ltsMedidas.setModel(mdlCombo);
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
+        for(int i = 0;i<medidas.length; i++) {
+        mdlCombo.addElement(medidas[i]);
+        }
+    }
+    public void sel(){
+        
+    }
+    
+    public void conversion(double conv,String st,int filas){
+    switch(st) {
+            case "lb":
+            conv = Float.parseFloat(txtCant.getText())*453.592;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("g",filas,2);
+                break;
+            case "fl.oz.":
+            conv = Float.parseFloat(txtCant.getText())*29.5735;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("ml",filas,2);
+                break;
+            case "oz":
+            conv = Float.parseFloat(txtCant.getText())*29.5735;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("ml",filas,2);
+                break;
+            case "gal":
+            conv = Float.parseFloat(txtCant.getText())*3785.41;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("ml",filas,2);
+                break;
+            case "ml":
+            cantidades_reg.setValueAt(Float.parseFloat(txtCant.getText()),filas,1);
+            cantidades_reg.setValueAt("ml",filas,2);    
+                break;
+            case "gr":
+            cantidades_reg.setValueAt(Float.parseFloat(txtCant.getText()),filas,1);
+            cantidades_reg.setValueAt("g",filas,2);
+                break;
+            case "kg":
+            conv = Float.parseFloat(txtCant.getText())*1000;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("g",filas,2);
+                break;
+            case "lt":
+            conv = Float.parseFloat(txtCant.getText())*1000;
+            cantidades_reg.setValueAt(conv,filas,1);
+            cantidades_reg.setValueAt("ml",filas,2);
+                break;
+        }
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JTextField cantDispField;
+    private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel cantDispLabel;
     private javax.swing.JButton deleteButton;
     private javax.persistence.EntityManager entityManager;
-    private javax.swing.JTextField ingredienteIdField;
-    private javax.swing.JLabel ingredienteIdLabel;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private java.util.List<GUI.Ingredientes> list;
+    private javax.swing.JComboBox<String> lstIngredientes;
     private javax.swing.JComboBox<String> lstProductos;
-    private javax.swing.JComboBox<String> lstProductos1;
+    private javax.swing.JComboBox<String> ltsMedidas;
     private javax.swing.JButton newButton;
     private javax.swing.JLabel nombreLabel;
     private javax.persistence.Query query;
     private javax.swing.JButton refreshButton;
     private javax.swing.JButton saveButton;
     private javax.swing.JTable tblRecetas;
+    private javax.swing.JTextField txtCant;
     // End of variables declaration//GEN-END:variables
     public static void main(String[] args) {
         /* Set the Nimbus look and feel */

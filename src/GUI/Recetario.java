@@ -20,6 +20,7 @@ public class Recetario extends javax.swing.JFrame {
     private List<Productos> prod = new ArrayList<Productos>();
     private List<Ingrediente> ingrediente = new ArrayList<Ingrediente>();
     private List<Receta> cant = new ArrayList<Receta>();
+    private List<Ingrediente> med = new ArrayList<Ingrediente>();
     DefaultTableModel mod;
     DefaultTableModel cantidades_reg;
 
@@ -30,7 +31,7 @@ public class Recetario extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         cargarProductos();
 
-        int[] anchos = {300,50};
+        int[] anchos = {300,50,50};
         for(int i = 0;i<tblRecetas.getColumnCount(); i++) {
         tblRecetas.getColumnModel().getColumn(i).setPreferredWidth(anchos[i]);
         }
@@ -74,13 +75,13 @@ public class Recetario extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Ingrediente", "Cantidad"
+                "Ingrediente", "Cantidad", "Medida"
             }
         ));
         jScrollPane1.setViewportView(tblRecetas);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 100, 460, 150);
+        jScrollPane1.setBounds(20, 100, 480, 150);
 
         btnAceptar.setText("Aceptar");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,11 +118,15 @@ public class Recetario extends javax.swing.JFrame {
         cant = (List<Receta>) Recetas.select(Conexion.getDBConexion(), "select r.cant from ingredientes i inner join recetas r"
                                                                          + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
                                                                          + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Receta.class);
+        med = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select i.medida from ingredientes i inner join recetas r"
+                                                                         + " on r.ingrediente_id = i.ingrediente_id inner join productos p "
+                                                                         + "on p.producto_id = r.producto_id where p.nombre like '"+ lstProductos.getSelectedItem().toString() +"'", Ingrediente.class);
         
         tblRecetas.setDefaultEditor(Object.class, null);
         cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
         int largoI = ingrediente.size();
         int largoC = cant.size();
+        int largoM = med.size();
         //Lipia la tabla
         int filas = tblRecetas.getRowCount();
         for(int l=0;l<filas;l++){
@@ -135,6 +140,10 @@ public class Recetario extends javax.swing.JFrame {
         for(int l=0;l<largoC;l++){
              Receta in = (Receta) cant.get(l);
              cantidades_reg.setValueAt(in.getCant(),l,1);
+          }
+        for(int l=0;l<largoM;l++){
+             Ingrediente in = (Ingrediente) med.get(l);
+             cantidades_reg.setValueAt(in.getMedida(),l,2);
           }
         
         

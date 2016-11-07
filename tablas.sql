@@ -9,7 +9,7 @@ CONSTRAINT  metodos_pago_PK PRIMARY KEY (metodo_clave)
 CREATE TABLE usuarios
 (
 	usuario_id           int(3) NOT NULL ,
-	contraseña           VARCHAR2(8) NULL ,
+	contraseï¿½a           VARCHAR2(8) NULL ,
 	rol                  VARCHAR2(13) NULL ,
 CONSTRAINT  usuarios_PK PRIMARY KEY (usuario_id)
 );
@@ -51,6 +51,7 @@ CREATE TABLE ingredientes
 	cant_disp            FLOAT NULL ,
 	fecha_cad            DATE NULL ,
 	fecha_ped            DATE NULL ,
+	medida							 VARCHAR(5) NULL,
 CONSTRAINT  ingredientes_PK PRIMARY KEY (ingrediente_id)
 );
 
@@ -105,7 +106,7 @@ INSERT INTO ingredientes VALUES(13, 'Mermelada de zarzamora', 10000, '2016-12-31
 INSERT INTO ingredientes VALUES(14, 'Lechera', 10000, '2016-12-31', '2016-05-20');
 INSERT INTO ingredientes VALUES(15, 'Queso', 10000, '2016-12-31', '2016-05-20');
 INSERT INTO ingredientes VALUES(16, 'Jamon', 10000, '2016-12-31', '2016-05-20');
-INSERT INTO ingredientes VALUES(17, 'Champiñones', 10000, '2016-12-31', '2016-05-20');
+INSERT INTO ingredientes VALUES(17, 'Champiï¿½ones', 10000, '2016-12-31', '2016-05-20');
 
 
 /*tabla prooductos*/
@@ -139,7 +140,7 @@ INSERT INTO prooductos VALUES(26, 'Crepa jamonphi', 35);
 INSERT INTO prooductos VALUES(27, 'Crepa champhi', 35);
 INSERT INTO prooductos VALUES(28, 'Crepa queso', 20);
 INSERT INTO prooductos VALUES(29, 'Crepa jamon', 20);
-INSERT INTO prooductos VALUES(30, 'Crepa champiñones', 20);
+INSERT INTO prooductos VALUES(30, 'Crepa champiï¿½ones', 20);
 INSERT INTO prooductos VALUES(31, 'Americano chico', 18);
 INSERT INTO prooductos VALUES(32, 'Americano mediano', 23);
 INSERT INTO prooductos VALUES(33, 'Americano grade', 26);
@@ -268,7 +269,7 @@ INSERT INTO recetas VALUES(22, 16, 25.0);/*jamon*/
 INSERT INTO recetas VALUES(22, 8, 450.0);/*masa*/
 
 INSERT INTO recetas VALUES(23, 15, 25.0);/*queso. QUESOCHAMP*/
-INSERT INTO recetas VALUES(23, 17, 25.0);/*champiñones*/
+INSERT INTO recetas VALUES(23, 17, 25.0);/*champiï¿½ones*/
 INSERT INTO recetas VALUES(23, 8, 450.0);/*masa*/
 
 INSERT INTO recetas VALUES(24, 15, 25.0);/*queso. QUESODELPHIA*/
@@ -276,14 +277,14 @@ INSERT INTO recetas VALUES(24, 11, 25.0);/*philadelphia*/
 INSERT INTO recetas VALUES(24, 8, 450.0);/*masa*/
 
 INSERT INTO recetas VALUES(25, 16, 25.0);/*jamon. JAMONCHAMP.*/
-INSERT INTO recetas VALUES(25, 17, 25.0);/*champiñones*/
+INSERT INTO recetas VALUES(25, 17, 25.0);/*champiï¿½ones*/
 INSERT INTO recetas VALUES(25, 8, 450.0);/*masa*/
 
 INSERT INTO recetas VALUES(26, 16, 25.0);/*jamon. JAMONDELPHIA*/
 INSERT INTO recetas VALUES(26, 11, 25.0);/*philadelphia*/
 INSERT INTO recetas VALUES(26, 8, 450.0);/*masa*/
 
-INSERT INTO recetas VALUES(27, 17, 25.0);/*champiñon. CHAMPIDELPHIA*/
+INSERT INTO recetas VALUES(27, 17, 25.0);/*champiï¿½on. CHAMPIDELPHIA*/
 INSERT INTO recetas VALUES(27, 11, 25.0);/*philadelphia*/
 INSERT INTO recetas VALUES(27, 8, 450.0);/*masa*/
 
@@ -293,7 +294,7 @@ INSERT INTO recetas VALUES(28, 8, 25.0);/*masa*/
 INSERT INTO recetas VALUES(29, 16, 30.0);/*jamon SOLO JAMON*/
 INSERT INTO recetas VALUES(29, 8, 30.0);/*masa*/
 
-INSERT INTO recetas VALUES(30, 17, 25.5);/*champiñones SOLO CHAMPIÑON*/
+INSERT INTO recetas VALUES(30, 17, 25.5);/*champiï¿½ones SOLO CHAMPIï¿½ON*/
 INSERT INTO recetas VALUES(30, 8, 25.5);/*masa*/
 
 INSERT INTO recetas VALUES(31, 1, 50.0);/*cafe. AMERICANO CHICO*/

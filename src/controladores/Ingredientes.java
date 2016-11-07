@@ -17,4 +17,13 @@ public class Ingredientes extends BaseController{
         return precios;
     }
     
+    public static List<Ingredientes> ingredientes(){
+
+        String query = "select nombre from productos";
+        List<Ingredientes> ingredientes = (List<Ingredientes>) Ingredientes.select(Conexion.getDBConexion(), query, Ingrediente.class);
+        System.out.println("productos = " + ingredientes.stream().collect(Collectors.toList()));
+        
+        return ingredientes;
+    }
+    
 }

@@ -10,6 +10,7 @@ import java.beans.Beans;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.RollbackException;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -20,6 +21,7 @@ import javax.swing.JPanel;
 public class InventarioModPanel extends JPanel {
     
     public InventarioModPanel() {
+        Medidas();
         initComponents();
         if (!Beans.isDesignTime()) {
             entityManager.getTransaction().begin();
@@ -53,6 +55,8 @@ public class InventarioModPanel extends JPanel {
         refreshButton = new javax.swing.JButton();
         newButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        ltsMedidas = new javax.swing.JComboBox<>();
 
         FormListener formListener = new FormListener();
 
@@ -121,6 +125,10 @@ public class InventarioModPanel extends JPanel {
 
         deleteButton.addActionListener(formListener);
 
+        jLabel1.setText("Medida:");
+
+        ltsMedidas.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -148,8 +156,13 @@ public class InventarioModPanel extends JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(ingredienteIdField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
                                     .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                    .addComponent(cantDispField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-                                    .addComponent(fechaPedField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)))
+                                    .addComponent(fechaPedField, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(cantDispField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(ltsMedidas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                             .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 447, Short.MAX_VALUE))))
                 .addContainerGap())
         );
@@ -172,7 +185,9 @@ public class InventarioModPanel extends JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cantDispLabel)
-                    .addComponent(cantDispField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cantDispField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(ltsMedidas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fechaPedLabel)
@@ -258,7 +273,15 @@ public class InventarioModPanel extends JPanel {
         }
     }//GEN-LAST:event_saveButtonActionPerformed
 
-
+    public void Medidas(){
+        DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
+        ltsMedidas.setModel(mdlCombo);
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
+        for(int i = 0;i<medidas.length; i++) {
+        mdlCombo.addElement(medidas[i]);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cantDispField;
     private javax.swing.JLabel cantDispLabel;
@@ -268,7 +291,9 @@ public class InventarioModPanel extends JPanel {
     private javax.swing.JLabel fechaPedLabel;
     private javax.swing.JTextField ingredienteIdField;
     private javax.swing.JLabel ingredienteIdLabel;
+    private javax.swing.JLabel jLabel1;
     private java.util.List<GUI.Ingredientes> list;
+    private javax.swing.JComboBox<String> ltsMedidas;
     private javax.swing.JScrollPane masterScrollPane;
     private javax.swing.JTable masterTable;
     private javax.swing.JButton newButton;

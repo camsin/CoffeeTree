@@ -1,5 +1,5 @@
 ﻿
-CREATE TABLE ingredientes(ingrediente_id INTEGER NOT NULL ,nombre VARCHAR2(30),cant_disp FLOAT,fecha_ped DATE,PRIMARY KEY (ingrediente_id))
+CREATE TABLE ingredientes(ingrediente_id INTEGER NOT NULL ,nombre VARCHAR2(30),cant_disp FLOAT,fecha_ped DATE,medida VARCHAR(3),PRIMARY KEY (ingrediente_id))
 
 CREATE TABLE usuarios(usuario_id INTEGER NOT NULL ,contrasena VARCHAR2(8),rol VARCHAR2(13),PRIMARY KEY (usuario_id))
 
@@ -35,39 +35,39 @@ INSERT INTO usuarios(usuario_id,contrasena,rol) VALUES(1, '123', 'Administrador'
 
 INSERT INTO usuarios(usuario_id,contrasena,rol) VALUES(2, '321', 'Cajero')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(1, 'Cafe', 10000,  (select to_date(sysdate,'dd-mm-yyyy') from dual))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(1, 'Cafe', 10000,  (select to_date(sysdate,'dd-mm-yyyy') from dual),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(2, 'Leche', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(2, 'Leche', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(3, 'Jarabe de chololate', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(3, 'Jarabe de chololate', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(4, 'Jarabe de chololate blanco', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(4, 'Jarabe de chololate blanco', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(5, 'Esencia de te chai', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(5, 'Esencia de te chai', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(6, 'Polvo frapuccino', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(6, 'Polvo frapuccino', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(7, 'Jarabe trutas tropicales', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(7, 'Jarabe trutas tropicales', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(8, 'Masa de crepa', 10000, to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(8, 'Masa de crepa', 10000, to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(9, 'Nutella', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(9, 'Nutella', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(10, 'Cajeta', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(10, 'Cajeta', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(11, 'Philadelphia', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(11, 'Philadelphia', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(12, 'Mermelada de fresa', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(12, 'Mermelada de fresa', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(13, 'Mermelada de zarzamora', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(13, 'Mermelada de zarzamora', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(14, 'Lechera', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(14, 'Lechera', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'ml')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(15, 'Queso', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(15, 'Queso', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(16, 'Jamon', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(16, 'Jamon', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
-INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped) VALUES(17, 'Champiñones', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'))
+INSERT INTO ingredientes(ingrediente_id,nombre,cant_disp,fecha_ped,medida) VALUES(17, 'Champiñones', 10000,  to_date('2016-05-20', 'yyyy/mm/dd'),'g')
 
 INSERT INTO productos(producto_id,nombre,precio) VALUES(1, 'Crepa nutcaje', 35)
 

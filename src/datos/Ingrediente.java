@@ -11,10 +11,13 @@ public class Ingrediente extends BaseModel{
     public static final String cant_disp = "cant_disp";
     public static final String fecha_cad = "fecha_cad";
     public static final String fecha_ped = "fecha_ped";
+    public static final String  medida = "medida";
 
     private BigDecimal id_ingrediente;
     
     private String nombre_ingrediente;
+    
+    private String medida_nomb;
     
     private BigDecimal cantidad_disponible;
     
@@ -80,6 +83,17 @@ public class Ingrediente extends BaseModel{
         java.sql.Timestamp oldFecha_pedido = this.fecha_pedido;
         this.fecha_pedido = fecha_pedido;
         propertyChangeSupport.firePropertyChange(fecha_ped, oldFecha_pedido, fecha_pedido);
+    }
+    
+    public String getMedida() {
+        return medida_nomb;
+    }
+
+  
+    public void setMedida(String nombre_Med) {
+        java.lang.String oldNombre_ingrediente = this.medida_nomb;
+        this.medida_nomb = nombre_Med;
+        propertyChangeSupport.firePropertyChange(medida, oldNombre_ingrediente, nombre_Med);
     }
     
 }
