@@ -13,14 +13,33 @@ public class Administrar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnBdR = new javax.swing.JButton();
+        btnBd = new javax.swing.JButton();
         btnAtras = new javax.swing.JButton();
         btnCon_vent = new javax.swing.JButton();
         btnMod_Inv = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        btnBd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        btnBdR.setText("RUD RECETAS");
+        btnBdR.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBdRActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBdR);
+        btnBdR.setBounds(590, 450, 380, 260);
+
+        btnBd.setText("CRUD");
+        btnBd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBdActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBd);
+        btnBd.setBounds(113, 450, 380, 260);
 
         btnAtras.setBorderPainted(false);
         btnAtras.setContentAreaFilled(false);
@@ -60,15 +79,6 @@ public class Administrar extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 1127, 725);
 
-        btnBd.setText("CRUD");
-        btnBd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBdActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnBd);
-        btnBd.setBounds(113, 450, 380, 260);
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -93,6 +103,11 @@ public class Administrar extends javax.swing.JFrame {
         InventarioMod im = new InventarioMod();
         im.setVisible(true);
     }//GEN-LAST:event_btnBdActionPerformed
+
+    private void btnBdRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBdRActionPerformed
+        InventarioModR im = new InventarioModR();
+        im.setVisible(true);
+    }//GEN-LAST:event_btnBdRActionPerformed
 
     public static void main(String args[]) {
         
@@ -129,6 +144,7 @@ public class Administrar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private javax.swing.JButton btnBd;
+    private javax.swing.JButton btnBdR;
     private javax.swing.JButton btnCon_vent;
     private javax.swing.JButton btnMod_Inv;
     private javax.swing.JLabel jLabel1;

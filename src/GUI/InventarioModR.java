@@ -9,15 +9,15 @@ package GUI;
  *
  * @author Hector
  */
-public class InventarioMod extends javax.swing.JFrame {
+public class InventarioModR extends javax.swing.JFrame {
 
     /**
      * Creates new form InventarioMod
      */
-    public InventarioMod() {
+    public InventarioModR() {
             setUndecorated(true);
             initComponents();
-            this.setSize(509, 424);
+            this.setSize(532, 445);
             this.setLocationRelativeTo(null);
     }
 
@@ -31,7 +31,7 @@ public class InventarioMod extends javax.swing.JFrame {
     private void initComponents() {
 
         btnAtras = new javax.swing.JButton();
-        inventarioModPanel1 = new GUI.InventarioModPanel();
+        inventarioModRPanel1 = new GUI.InventarioModRPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -44,8 +44,8 @@ public class InventarioMod extends javax.swing.JFrame {
         });
         getContentPane().add(btnAtras);
         btnAtras.setBounds(30, 40, 70, 23);
-        getContentPane().add(inventarioModPanel1);
-        inventarioModPanel1.setBounds(21, 23, 467, 377);
+        getContentPane().add(inventarioModRPanel1);
+        inventarioModRPanel1.setBounds(0, 70, 530, 360);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -71,26 +71,27 @@ public class InventarioMod extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InventarioMod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventarioModR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InventarioMod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventarioModR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InventarioMod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventarioModR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InventarioMod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InventarioModR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InventarioMod().setVisible(true);
+                new InventarioModR().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
-    private GUI.InventarioModPanel inventarioModPanel1;
+    private GUI.InventarioModRPanel inventarioModRPanel1;
     // End of variables declaration//GEN-END:variables
 }
