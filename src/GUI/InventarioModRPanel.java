@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package GUI;
 
 import java.awt.EventQueue;
@@ -14,6 +10,7 @@ import controladores.Ingredientes;
 import controladores.Productos;
 import controladores.Recetas;
 import datos.Ingrediente;
+import datos.Producto;
 import datos.Receta;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
@@ -34,6 +31,7 @@ public class InventarioModRPanel extends JPanel {
     
     
     private List<Productos> prod = new ArrayList<Productos>();
+    private List<Producto> prodd = new ArrayList<Producto>();
     private List<Ingrediente> ingrediente = new ArrayList<Ingrediente>();
     private List<Ingrediente> ing = new ArrayList<Ingrediente>();
     private List<Receta> cant = new ArrayList<Receta>();
@@ -96,6 +94,7 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
     
     }
     lstIngredientes.setEnabled(false);
+    deleteButton.setEnabled(true);
     txtCant.setText(tblRecetas.getValueAt(tblRecetas.getSelectedRow(),1).toString());
 }
 }
@@ -173,11 +172,11 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
 
         jLabel1.setText("Producto");
         add(jLabel1);
-        jLabel1.setBounds(70, 10, 60, 14);
+        jLabel1.setBounds(80, 10, 60, 14);
 
         lstProductos.addActionListener(formListener);
         add(lstProductos);
-        lstProductos.setBounds(120, 10, 210, 20);
+        lstProductos.setBounds(150, 10, 210, 20);
 
         jLabel2.setText("Receta");
         add(jLabel2);
@@ -236,6 +235,9 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
             else if (evt.getSource() == deleteButton) {
                 InventarioModRPanel.this.deleteButtonActionPerformed(evt);
             }
+            else if (evt.getSource() == txtCant) {
+                InventarioModRPanel.this.txtCantActionPerformed(evt);
+            }
             else if (evt.getSource() == lstProductos) {
                 InventarioModRPanel.this.lstProductosActionPerformed(evt);
             }
@@ -247,9 +249,6 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
             }
             else if (evt.getSource() == btnCancelar) {
                 InventarioModRPanel.this.btnCancelarActionPerformed(evt);
-            }
-            else if (evt.getSource() == txtCant) {
-                InventarioModRPanel.this.txtCantActionPerformed(evt);
             }
         }
 
@@ -272,8 +271,75 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
     
     @SuppressWarnings("unchecked")
     private void refreshButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshButtonActionPerformed
-        //seguro?
-        //Recupero un array con la receta
+        lstProductos.setEnabled(true);
+        newButton.setEnabled(true);
+        deleteButton.setEnabled(true);
+        btnCancelar.setEnabled(false);
+        refreshButton.setEnabled(false);
+        saveButton.setEnabled(true); 
+        tblRecetas.setDefaultEditor(Object.class, null);
+        cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+        
+//seguro?
+        int opc = JOptionPane.showConfirmDialog(null,"¿Seguro?","Alerta",JOptionPane.YES_NO_OPTION);
+        if(opc == JOptionPane.YES_OPTION){
+         int opc2 = JOptionPane.showConfirmDialog(null,"Cambios no podran ser revertidos \n ¿Seguro?","Alerta",JOptionPane.YES_NO_OPTION);
+            if(opc2 == JOptionPane.YES_OPTION){
+                //Recupero tres array con nombre, cant, medida
+                
+                
+                ///Producto
+                
+                String selected = lstProductos.getSelectedItem().toString();
+                System.out.println("Lols");
+
+                prodd = (List<Producto>) Productos.select(Conexion.getDBConexion(), "select producto_id from productos where nombre like '" + selected + "'", Producto.class);
+                System.out.println("Producto seleccionado: " + prodd.get(0).getProducto_id());
+                Producto por = (Producto) prodd.get(0);
+                System.out.println("Antes del delete");
+                // DELETE
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("delete * from recetas where producto_id = '%s'",por.getProducto_id()));
+                System.out.println("Se ejecuta 2,antes del for");
+                cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+                // Eliminar todo lo del producto
+                //Ingredientes del producto
+                if(cantidades_reg.getRowCount()!=0){
+                   for(int i=0;i<cantidades_reg.getRowCount();i++){
+                System.out.println("Row count: " + cantidades_reg.getRowCount()); 
+                String ingT = cantidades_reg.getValueAt(i, 0).toString();
+                String cantT = cantidades_reg.getValueAt(i, 1).toString();
+                ing = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select ingrediente_id from ingredientes where nombre like '" + ingT + "'", Ingrediente.class);
+                Ingrediente in = (Ingrediente) ing.get(0);
+                //inserts de tablasy
+                    System.out.println("producto_id:" + por.getProducto_id());
+                    System.out.println("ingrediente_id:" + in.getIngrediente_id());
+                    System.out.println("cantidad" + cantT);
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",por.getProducto_id(),in.getIngrediente_id(),cantT));
+               } 
+                }else{
+                
+                
+                
+                System.out.println("Row count: " + cantidades_reg.getRowCount()); 
+                String ingT = cantidades_reg.getValueAt(0, 0).toString();
+                String cantT = cantidades_reg.getValueAt(0, 1).toString();
+                ing = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select ingrediente_id from ingredientes where nombre like '" + ingT + "'", Ingrediente.class);
+                Ingrediente in = (Ingrediente) ing.get(0);
+                //inserts de tablasy
+                    System.out.println("producto_id:" + por.getProducto_id());
+                    System.out.println("ingrediente_id:" + in.getIngrediente_id());
+                    System.out.println("cantidad" + cantT);
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",por.getProducto_id(),in.getIngrediente_id(),cantT));
+               }
+                
+                JOptionPane.showConfirmDialog(null,"Resgistrado","Alerta",JOptionPane.YES_NO_OPTION);
+                
+            }
+        }
+        
+        
+        
+        //Recupero tres array con nombre, cant, medida
         // Cuanto el array
         //Con el tamaño del array existente, borro todas las dependencias que exitian
         // Luego hago un for con la nueva receta y coloco inserts que toman los datos de la tabla
@@ -308,9 +374,17 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        tblRecetas.setDefaultEditor(Object.class, null);
         cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
-        int fila = cantidades_reg.getRowCount()-1;
+        int fila=0;
+        if(cantidades_reg.getRowCount()!=0){
+         fila = cantidades_reg.getRowCount()-1;
+        }else{
+        fila=cantidades_reg.getRowCount();
+        }
+        if(fila!=0){
+        
+        
+        
         String in = lstIngredientes.getSelectedItem().toString();
         int i=0;
         int bandera=0,k=0;
@@ -382,7 +456,9 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
         
         
        
-     
+        }else{
+        refreshButton.setEnabled(true);
+        }
         
     }//GEN-LAST:event_saveButtonActionPerformed
 

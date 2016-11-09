@@ -185,6 +185,7 @@ public class MenuInicioAdmin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnBuscar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCant_Disp = new javax.swing.JTable();
         btnSalir = new javax.swing.JButton();
@@ -204,6 +205,15 @@ public class MenuInicioAdmin extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
+
+        btnBuscar.setText("jButton1");
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBuscar);
+        btnBuscar.setBounds(20, 650, 200, 70);
 
         jScrollPane2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane2.setFocusable(false);
@@ -529,6 +539,11 @@ public class MenuInicioAdmin extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        Recetario rc = new Recetario();
+        rc.setVisible(true);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -572,6 +587,7 @@ public class MenuInicioAdmin extends javax.swing.JFrame {
     private javax.swing.JButton btnBebCal;
     private javax.swing.JButton btnBebFrias;
     private javax.swing.JButton btnBloquear;
+    private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnCrepas;
     private javax.swing.JButton btnEliminarProducto;
     private javax.swing.JButton btnPagar;
