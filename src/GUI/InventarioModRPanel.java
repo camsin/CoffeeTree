@@ -82,7 +82,6 @@ tblRecetas.addMouseListener(new MouseAdapter() {
 public void mouseClicked(MouseEvent evento) { 
 int fil = tblRecetas.getSelectedRow();
 String in = tblRecetas.getValueAt(fil, 0).toString();
-String m = tblRecetas.getValueAt(fil, 2).toString();
 if(btnCancelar.isEnabled()){
 
 }else{
@@ -91,14 +90,6 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
         if(in.equals(lstIngredientes.getSelectedItem().toString())){
         lstIngredientes.setSelectedIndex(i);
         i=lstIngredientes.getItemCount();
-        }
-    
-    }
-for(int i=0;i<ltsMedidas.getItemCount();i++){
-        ltsMedidas.setSelectedIndex(i);
-        if(m.equals(ltsMedidas.getSelectedItem().toString())){
-        ltsMedidas.setSelectedIndex(i);
-        i=ltsMedidas.getItemCount();
         }
     
     }
@@ -286,6 +277,7 @@ for(int i=0;i<ltsMedidas.getItemCount();i++){
         btnCancelar.setEnabled(false);
         refreshButton.setEnabled(false);
         saveButton.setEnabled(true); 
+        tblRecetas.setDefaultEditor(Object.class, null);
         cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
         
 //seguro?
@@ -303,26 +295,26 @@ for(int i=0;i<ltsMedidas.getItemCount();i++){
 
                 prodd = (List<Producto>) Productos.select(Conexion.getDBConexion(), "select producto_id from productos where nombre like '" + selected + "'", Producto.class);
                 System.out.println("Producto seleccionado: " + prodd.get(0).getProducto_id());
-                //Producto por = (Producto) prodd.get(0);
+                Producto por = (Producto) prodd.get(0);
                 System.out.println("Antes del delete");
                 // DELETE
-                Recetas.executeQuery(Conexion.getDBConexion(), String.format("delete * from recetas where producto_id = '%s'",prodd.get(0).getProducto_id()));
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("delete * from recetas where producto_id = '%s'",por.getProducto_id()));
                 System.out.println("Se ejecuta 2,antes del for");
-                //cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+                cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
                 // Eliminar todo lo del producto
                 //Ingredientes del producto
                 if(cantidades_reg.getRowCount()!=0){
                    for(int i=0;i<cantidades_reg.getRowCount();i++){
                 System.out.println("Row count: " + cantidades_reg.getRowCount()); 
-                String ingT = cantidades_reg.getValueAt(i,0).toString();
+                String ingT = cantidades_reg.getValueAt(i, 0).toString();
                 String cantT = cantidades_reg.getValueAt(i, 1).toString();
                 ing = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select ingrediente_id from ingredientes where nombre like '" + ingT + "'", Ingrediente.class);
                 Ingrediente in = (Ingrediente) ing.get(0);
                 //inserts de tablasy
-                    System.out.println("producto_id:" + prodd.get(0).getProducto_id());
+                    System.out.println("producto_id:" + por.getProducto_id());
                     System.out.println("ingrediente_id:" + in.getIngrediente_id());
-                    System.out.println("cantidad: " + cantT);
-                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",prodd.get(0).getProducto_id(),ing.get(0).getIngrediente_id(),cantT));
+                    System.out.println("cantidad" + cantT);
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",por.getProducto_id(),in.getIngrediente_id(),cantT));
                } 
                 }else{
                 
@@ -334,10 +326,10 @@ for(int i=0;i<ltsMedidas.getItemCount();i++){
                 ing = (List<Ingrediente>) Ingredientes.select(Conexion.getDBConexion(), "select ingrediente_id from ingredientes where nombre like '" + ingT + "'", Ingrediente.class);
                 Ingrediente in = (Ingrediente) ing.get(0);
                 //inserts de tablasy
-                    System.out.println("producto_id:" + prodd.get(0).getProducto_id());
+                    System.out.println("producto_id:" + por.getProducto_id());
                     System.out.println("ingrediente_id:" + in.getIngrediente_id());
                     System.out.println("cantidad" + cantT);
-                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",prodd.get(0).getProducto_id(),in.getIngrediente_id(),cantT));
+                Recetas.executeQuery(Conexion.getDBConexion(), String.format("insert into recetas(producto_id, ingrediente_id, cant) values(%s,%s,%s)",por.getProducto_id(),in.getIngrediente_id(),cantT));
                }
                 
                 JOptionPane.showConfirmDialog(null,"Resgistrado","Alerta",JOptionPane.YES_NO_OPTION);
@@ -382,52 +374,47 @@ for(int i=0;i<ltsMedidas.getItemCount();i++){
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        int opc = JOptionPane.showConfirmDialog(null,"¿Seguro?","Alerta",JOptionPane.YES_NO_OPTION);
-        if(opc == JOptionPane.YES_OPTION){}
         cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
-        int fila = cantidades_reg.getRowCount();
-       
-        
-        
-        
+        int fila=0;
+        if(cantidades_reg.getRowCount()!=0){
+         fila = cantidades_reg.getRowCount()-1;
+        }else{
+        fila=cantidades_reg.getRowCount();
+        }
         if(fila!=0){
-            System.out.println("Filas: " + fila);
         
-        // Ingrediente a ingresar
+        
+        
         String in = lstIngredientes.getSelectedItem().toString();
-        //banderas
-        int bandera=0,k=0,n=0;
-        
-        // primero hay que validad si se agrega un nuevo producto
-         for(int i=0;i<fila;i++){
-            
+        int i=0;
+        int bandera=0,k=0;
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
+            k=1;
+        }
+        if(k==0){
+        for(i=0;i<fila;i++){
+            cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
+            fila = cantidades_reg.getRowCount()-1;
             System.out.println("valor a:" + cantidades_reg.getValueAt(i, 0).toString());
-            System.out.println("valor in:" + in);
+            System.out.println("valor a:" + in);
         if((cantidades_reg.getValueAt(i, 0).toString().equals(in) && btnCancelar.isEnabled())){
                 JOptionPane.showMessageDialog(null,"¡¡El ingrediente ya esta!!\n Cancela y selecciona para modificar");
-                i=1000;
+                i=fila;
                 bandera = 1;
                 System.out.println("bandera a:" + bandera);
         }
         }
-         
-         
-        if(bandera!=1){
-         if(btnCancelar.isEnabled()){
-        //Hay que validar datos
-       
-        
-        
-        
-        if((txtCant.getText().isEmpty())||(Double.parseDouble(txtCant.getText())==0)){
-            if(Double.parseDouble(txtCant.getText())==0){
-            JOptionPane.showMessageDialog(null,"¡¡Cantidades mayores a 0!!");
-            }else{
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
             JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
-            }
-                   
+            
         }else{
-                
+        
+        if(btnCancelar.isEnabled()){
+        bandera = 2;
+        
         lstIngredientes.setEnabled(false);
         newButton.setEnabled(true);
         deleteButton.setEnabled(true);
@@ -435,45 +422,44 @@ for(int i=0;i<ltsMedidas.getItemCount();i++){
         refreshButton.setEnabled(true);
         saveButton.setEnabled(true);
           //Guardar datos en la tabla
-        int filas = cantidades_reg.getRowCount()-1;
+        int filas = tblRecetas.getRowCount()-1;
         //Nombre de ingrediente
         cantidades_reg.setValueAt(lstIngredientes.getSelectedItem().toString(),filas,0);
-        String[] medidas = {"lb","fl.oz.","oz","gal","ml","g","kg","lt"};
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
         //Por unidad de medida a la tabla
-        float conv=0;
+        double conv=0;
         conversion(conv,ltsMedidas.getSelectedItem().toString(),filas);
         txtCant.setText("");
-        n=1;
-        }
-        }
-        
-         
-        // O si solo se modifica ingrediente
-        if(n==0){
-        if((txtCant.getText().isEmpty())||(Double.parseDouble(txtCant.getText())==0)){
-            if(Double.parseDouble(txtCant.getText())==0){
-            JOptionPane.showMessageDialog(null,"¡¡Cantidades mayores a 0!!");
-            }else{
-            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
-            }
-            k=1;   
-            refreshButton.setEnabled(true);
         }else{
+        if((bandera!=0)||(txtCant.getText().isEmpty())||(txtCant.getText().equals("")||(txtCant==null))){
+            if(txtCant.getText().isEmpty())
+            JOptionPane.showMessageDialog(null,"¡¡Faltan datos!!");
+            k=1;
+        }
+        if(k==0){
         newButton.setEnabled(true);
         deleteButton.setEnabled(true);
         btnCancelar.setEnabled(false);
         refreshButton.setEnabled(true);
         saveButton.setEnabled(true);
-        float conv=0;
+        double conv=0;
         int filas = tblRecetas.getSelectedRow();
         conversion(conv,ltsMedidas.getSelectedItem().toString(),filas);
         txtCant.setText("");
         }
-        }
+        
         }
         
-              
         }
+        
+        }                  
+        
+        
+       
+        }else{
+        refreshButton.setEnabled(true);
+        }
+        
     }//GEN-LAST:event_saveButtonActionPerformed
 
     private void lstProductosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lstProductosActionPerformed
@@ -589,7 +575,7 @@ evt.consume();
     public void Medidas(){
         DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
         ltsMedidas.setModel(mdlCombo);
-        String[] medidas = {"lb","fl.oz.","oz","gal","ml","g","kg","lt"};
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
         for(int i = 0;i<medidas.length; i++) {
         mdlCombo.addElement(medidas[i]);
         }
@@ -598,25 +584,25 @@ evt.consume();
         
     }
     
-    public void conversion(float conv,String st,int filas){
+    public void conversion(double conv,String st,int filas){
     switch(st) {
             case "lb":
-            conv = (float) (Double.parseDouble(txtCant.getText())*453.592);
+            conv = Float.parseFloat(txtCant.getText())*453.592;
             cantidades_reg.setValueAt(conv,filas,1);
             cantidades_reg.setValueAt("g",filas,2);
                 break;
             case "fl.oz.":
-            conv = (float) (Double.parseDouble(txtCant.getText())*29.5735);
+            conv = Float.parseFloat(txtCant.getText())*29.5735;
             cantidades_reg.setValueAt(conv,filas,1);
             cantidades_reg.setValueAt("ml",filas,2);
                 break;
             case "oz":
-            conv = (float) (Double.parseDouble(txtCant.getText())*29.5735);
+            conv = Float.parseFloat(txtCant.getText())*29.5735;
             cantidades_reg.setValueAt(conv,filas,1);
             cantidades_reg.setValueAt("ml",filas,2);
                 break;
             case "gal":
-            conv = (float) (Double.parseDouble(txtCant.getText())*3785.41);
+            conv = Float.parseFloat(txtCant.getText())*3785.41;
             cantidades_reg.setValueAt(conv,filas,1);
             cantidades_reg.setValueAt("ml",filas,2);
                 break;
@@ -624,7 +610,7 @@ evt.consume();
             cantidades_reg.setValueAt(Float.parseFloat(txtCant.getText()),filas,1);
             cantidades_reg.setValueAt("ml",filas,2);    
                 break;
-            case "g":
+            case "gr":
             cantidades_reg.setValueAt(Float.parseFloat(txtCant.getText()),filas,1);
             cantidades_reg.setValueAt("g",filas,2);
                 break;
