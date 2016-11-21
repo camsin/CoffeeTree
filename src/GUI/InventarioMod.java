@@ -30,8 +30,9 @@ public class InventarioMod extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAtras = new javax.swing.JButton();
         inventarioModPanel1 = new GUI.InventarioModPanel();
+        btnAtras = new javax.swing.JButton();
+        inventarioModPanel2 = new GUI.InventarioModPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -44,8 +45,8 @@ public class InventarioMod extends javax.swing.JFrame {
         });
         getContentPane().add(btnAtras);
         btnAtras.setBounds(30, 40, 70, 23);
-        getContentPane().add(inventarioModPanel1);
-        inventarioModPanel1.setBounds(50, 70, 412, 311);
+        getContentPane().add(inventarioModPanel2);
+        inventarioModPanel2.setBounds(50, 70, 412, 311);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -92,5 +93,6 @@ public class InventarioMod extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private GUI.InventarioModPanel inventarioModPanel1;
+    private GUI.InventarioModPanel inventarioModPanel2;
     // End of variables declaration//GEN-END:variables
 }
