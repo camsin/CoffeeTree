@@ -6,7 +6,7 @@
     <class>GUI.Recetas</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE"/>
-      <property name="javax.persistence.jdbc.user" value="CoffeeTreePT"/>
+      <property name="javax.persistence.jdbc.user" value="CoffeeTreePT1"/>
       <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>
       <property name="javax.persistence.jdbc.password" value="abcd1234"/>
     </properties>

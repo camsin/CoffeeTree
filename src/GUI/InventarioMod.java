@@ -30,8 +30,21 @@ public class InventarioMod extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnAtras = new javax.swing.JButton();
         inventarioModPanel1 = new GUI.InventarioModPanel();
+<<<<<<< HEAD
+<<<<<<< HEAD
+        btnAtras = new javax.swing.JButton();
+        inventarioModPanel2 = new GUI.InventarioModPanel();
+=======
+        inventarioModPanel2 = new GUI.InventarioModPanel();
+        btnAtras = new javax.swing.JButton();
+        inventarioModPanel4 = new GUI.InventarioModPanel();
+>>>>>>> origin/master
+=======
+        inventarioModPanel2 = new GUI.InventarioModPanel();
+        btnAtras = new javax.swing.JButton();
+        inventarioModPanel4 = new GUI.InventarioModPanel();
+>>>>>>> origin/master
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -44,8 +57,18 @@ public class InventarioMod extends javax.swing.JFrame {
         });
         getContentPane().add(btnAtras);
         btnAtras.setBounds(30, 40, 70, 23);
-        getContentPane().add(inventarioModPanel1);
-        inventarioModPanel1.setBounds(21, 23, 467, 377);
+<<<<<<< HEAD
+<<<<<<< HEAD
+        getContentPane().add(inventarioModPanel2);
+        inventarioModPanel2.setBounds(50, 70, 412, 311);
+=======
+        getContentPane().add(inventarioModPanel4);
+        inventarioModPanel4.setBounds(50, 90, 412, 311);
+>>>>>>> origin/master
+=======
+        getContentPane().add(inventarioModPanel4);
+        inventarioModPanel4.setBounds(50, 90, 412, 311);
+>>>>>>> origin/master
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -92,5 +115,14 @@ public class InventarioMod extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAtras;
     private GUI.InventarioModPanel inventarioModPanel1;
+    private GUI.InventarioModPanel inventarioModPanel2;
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+    private GUI.InventarioModPanel inventarioModPanel4;
+>>>>>>> origin/master
+=======
+    private GUI.InventarioModPanel inventarioModPanel4;
+>>>>>>> origin/master
     // End of variables declaration//GEN-END:variables
 }

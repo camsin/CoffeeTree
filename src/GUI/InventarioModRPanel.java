@@ -58,7 +58,6 @@ public class InventarioModRPanel extends JPanel {
         btnCancelar.setEnabled(false);
         refreshButton.setEnabled(false);
         saveButton.setEnabled(false); 
-        //txtCant.setEnabled(false);
         
         
 
@@ -133,16 +132,15 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
         ltsMedidas = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
-        btnCambios = new javax.swing.JButton();
 
         FormListener formListener = new FormListener();
 
         setLayout(null);
 
-        saveButton.setText("Save New");
+        saveButton.setText("Guardar");
         saveButton.addActionListener(formListener);
         add(saveButton);
-        saveButton.setBounds(430, 280, 80, 20);
+        saveButton.setBounds(430, 290, 71, 23);
 
         refreshButton.setText("Update");
         refreshButton.addActionListener(formListener);
@@ -218,11 +216,6 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
         btnCancelar.addActionListener(formListener);
         add(btnCancelar);
         btnCancelar.setBounds(240, 290, 90, 23);
-
-        btnCambios.setText("Save cambios");
-        btnCambios.addActionListener(formListener);
-        add(btnCambios);
-        btnCambios.setBounds(430, 310, 100, 20);
     }
 
     // Code for dispatching events from components to event handlers.
@@ -256,9 +249,6 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
             }
             else if (evt.getSource() == btnCancelar) {
                 InventarioModRPanel.this.btnCancelarActionPerformed(evt);
-            }
-            else if (evt.getSource() == btnCambios) {
-                InventarioModRPanel.this.btnCambiosActionPerformed(evt);
             }
         }
 
@@ -347,57 +337,14 @@ for(int i=0;i<lstIngredientes.getItemCount();i++){
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
-        //Aqui nomas debo validar que este habilitado el boton de cancelar y no haya vacios o ceros
-        if(btnCancelar.isEnabled()==true)
-        {
-            if(txtCant.getText().isEmpty()!=true)
-            {
-                if(Float.parseFloat(txtCant.getText())>0)
-                {
-                    
-                    int fila = cantidades_reg.getRowCount()-1;
-                    int bandera = 0;
-                    tblRecetas.setDefaultEditor(Object.class, null);
-                    cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();       
-                    String in = lstIngredientes.getSelectedItem().toString();
-
-                     //Ciclo para revisar que no se repitan cosillas
-                    for(int i=0;i<cantidades_reg.getRowCount()-1;i++){
-                    cantidades_reg = (DefaultTableModel)this.tblRecetas.getModel();
-
-                    if((cantidades_reg.getValueAt(i, 0).toString().equals(in) && btnCancelar.isEnabled())){
-                        JOptionPane.showMessageDialog(null,"¡¡El ingrediente ya esta!!\n Cancela y selecciona para modificar");
-                        i=cantidades_reg.getRowCount();
-                        bandera = 1;
-                        System.out.println("bandera a:" + bandera);
-                    }
-                    }
-                    if(bandera!=1){
-                    String selIng = lstIngredientes.getSelectedItem().toString();
-                    cantidades_reg.setValueAt(selIng, fila, 0);
-                    String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
-                    //Por unidad de medida a la tabla
-                    double conv=0;
-                    conversion(conv,ltsMedidas.getSelectedItem().toString(),cantidades_reg.getRowCount()-1);
-                    }
-                
-                }else
-                {
-                JOptionPane.showMessageDialog(null,"Mayor a cero");
-                }
-            }else
-            {
-            JOptionPane.showMessageDialog(null,"Ta' vacio");
-            }
-                         
-            
-        }else{
         
-            JOptionPane.showMessageDialog(null,"Agregue un nuevo ingridian");
-                
-        }
-        
-        
+        int filas = tblRecetas.getRowCount()-1;
+        //Nombre de ingrediente
+        cantidades_reg.setValueAt(lstIngredientes.getSelectedItem().toString(),filas,0);
+        String[] medidas = {"lb","fl.oz.","oz","gal","ml","gr","kg","lt"};
+        //Por unidad de medida a la tabla
+        double conv=0;
+        conversion(conv,ltsMedidas.getSelectedItem().toString(),filas);
         
         
     }//GEN-LAST:event_saveButtonActionPerformed
@@ -493,17 +440,6 @@ evt.consume();
 
     }//GEN-LAST:event_txtCantKeyTyped
 
-    private void btnCambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCambiosActionPerformed
-        if((txtCant.isEnabled())&&(btnCancelar.isEnabled()==false)&&(Float.parseFloat(txtCant.getText())>0)){ 
-        //si esta habilitado quiere decir o que se modifica o se selecciona algo y no es un articulo nuevo
-        
-        //Aqui ya nadamas meto codigo pa' que guarde en la tabla
-        
-        }else{
-        JOptionPane.showMessageDialog(cantDispLabel, "Nada seleccionado", "Error", ERROR);
-        } 
-    }//GEN-LAST:event_btnCambiosActionPerformed
-
     public void cargarIngredientes(){
         DefaultComboBoxModel mdlCombo= new DefaultComboBoxModel();
         lstIngredientes.setModel(mdlCombo);
@@ -582,7 +518,6 @@ evt.consume();
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
-    private javax.swing.JButton btnCambios;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JLabel cantDispLabel;
     private javax.swing.JButton deleteButton;
