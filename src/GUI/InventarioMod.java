@@ -45,7 +45,7 @@ public class InventarioMod extends javax.swing.JFrame {
         getContentPane().add(btnAtras);
         btnAtras.setBounds(30, 40, 70, 23);
         getContentPane().add(inventarioModPanel1);
-        inventarioModPanel1.setBounds(21, 23, 467, 377);
+        inventarioModPanel1.setBounds(50, 70, 412, 311);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

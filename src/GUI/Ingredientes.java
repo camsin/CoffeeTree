@@ -32,7 +32,8 @@ import javax.persistence.Transient;
     , @NamedQuery(name = "Ingredientes.findByIngredienteId", query = "SELECT i FROM Ingredientes i WHERE i.ingredienteId = :ingredienteId")
     , @NamedQuery(name = "Ingredientes.findByNombre", query = "SELECT i FROM Ingredientes i WHERE i.nombre = :nombre")
     , @NamedQuery(name = "Ingredientes.findByCantDisp", query = "SELECT i FROM Ingredientes i WHERE i.cantDisp = :cantDisp")
-    , @NamedQuery(name = "Ingredientes.findByFechaPed", query = "SELECT i FROM Ingredientes i WHERE i.fechaPed = :fechaPed")})
+    , @NamedQuery(name = "Ingredientes.findByFechaPed", query = "SELECT i FROM Ingredientes i WHERE i.fechaPed = :fechaPed")
+    , @NamedQuery(name = "Ingredientes.findByMedida", query = "SELECT i FROM Ingredientes i WHERE i.medida = :medida")})
 public class Ingredientes implements Serializable {
 
     @Transient
@@ -51,6 +52,8 @@ public class Ingredientes implements Serializable {
     @Column(name = "FECHA_PED")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaPed;
+    @Column(name = "MEDIDA")
+    private String medida;
 
     public Ingredientes() {
     }
@@ -97,6 +100,16 @@ public class Ingredientes implements Serializable {
         Date oldFechaPed = this.fechaPed;
         this.fechaPed = fechaPed;
         changeSupport.firePropertyChange("fechaPed", oldFechaPed, fechaPed);
+    }
+
+    public String getMedida() {
+        return medida;
+    }
+
+    public void setMedida(String medida) {
+        String oldMedida = this.medida;
+        this.medida = medida;
+        changeSupport.firePropertyChange("medida", oldMedida, medida);
     }
 
     @Override
