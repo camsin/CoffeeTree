@@ -33,6 +33,7 @@ public class InventarioMod extends javax.swing.JFrame {
         inventarioModPanel1 = new GUI.InventarioModPanel();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         btnAtras = new javax.swing.JButton();
         inventarioModPanel2 = new GUI.InventarioModPanel();
 =======
@@ -45,6 +46,11 @@ public class InventarioMod extends javax.swing.JFrame {
         btnAtras = new javax.swing.JButton();
         inventarioModPanel4 = new GUI.InventarioModPanel();
 >>>>>>> origin/master
+=======
+        inventarioModPanel2 = new GUI.InventarioModPanel();
+        btnAtras = new javax.swing.JButton();
+        inventarioModPanel4 = new GUI.InventarioModPanel();
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(null);
@@ -59,6 +65,7 @@ public class InventarioMod extends javax.swing.JFrame {
         btnAtras.setBounds(30, 40, 70, 23);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         getContentPane().add(inventarioModPanel2);
         inventarioModPanel2.setBounds(50, 70, 412, 311);
 =======
@@ -69,6 +76,10 @@ public class InventarioMod extends javax.swing.JFrame {
         getContentPane().add(inventarioModPanel4);
         inventarioModPanel4.setBounds(50, 90, 412, 311);
 >>>>>>> origin/master
+=======
+        getContentPane().add(inventarioModPanel4);
+        inventarioModPanel4.setBounds(50, 90, 412, 311);
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -118,11 +129,15 @@ public class InventarioMod extends javax.swing.JFrame {
     private GUI.InventarioModPanel inventarioModPanel2;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private GUI.InventarioModPanel inventarioModPanel4;
 >>>>>>> origin/master
 =======
     private GUI.InventarioModPanel inventarioModPanel4;
 >>>>>>> origin/master
+=======
+    private GUI.InventarioModPanel inventarioModPanel4;
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
     // End of variables declaration//GEN-END:variables
 }

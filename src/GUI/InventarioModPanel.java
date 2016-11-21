@@ -71,21 +71,27 @@ public class InventarioModPanel extends JPanel {
         columnBinding.setColumnClass(Double.class);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${medida}"));
         columnBinding.setColumnName("Medida");
         columnBinding.setColumnClass(String.class);
 =======
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${medida}"));
         columnBinding.setColumnName("Medida");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/master
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
@@ -127,6 +133,7 @@ public class InventarioModPanel extends JPanel {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         refreshButton.setText("Refresh");
 =======
         refreshButton.setText("Recargar");
@@ -134,6 +141,9 @@ public class InventarioModPanel extends JPanel {
 =======
         refreshButton.setText("Recargar");
 >>>>>>> origin/master
+=======
+        refreshButton.setText("Recargar");
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         refreshButton.addActionListener(formListener);
 
         newButton.setText("New");
@@ -203,9 +213,12 @@ public class InventarioModPanel extends JPanel {
                                     .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                                     .addComponent(cantDispField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))))))
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> origin/master
 =======
 >>>>>>> origin/master
+=======
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addContainerGap())
         );
 
@@ -217,6 +230,7 @@ public class InventarioModPanel extends JPanel {
                 .addContainerGap()
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
 =======
                 .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
@@ -224,6 +238,9 @@ public class InventarioModPanel extends JPanel {
 =======
                 .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
 >>>>>>> origin/master
+=======
+                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingredienteIdLabel)
@@ -242,6 +259,7 @@ public class InventarioModPanel extends JPanel {
                     .addComponent(medidaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 =======
                 .addGap(35, 35, 35)
@@ -249,6 +267,9 @@ public class InventarioModPanel extends JPanel {
 =======
                 .addGap(35, 35, 35)
 >>>>>>> origin/master
+=======
+                .addGap(35, 35, 35)
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(refreshButton)

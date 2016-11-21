@@ -125,6 +125,7 @@
               <EmptySpace min="-2" max="-2" attributes="0"/>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
               <Component id="masterScrollPane" pref="130" max="32767" attributes="0"/>
 =======
               <Component id="masterScrollPane" pref="127" max="32767" attributes="0"/>
@@ -132,6 +133,9 @@
 =======
               <Component id="masterScrollPane" pref="127" max="32767" attributes="0"/>
 >>>>>>> origin/master
+=======
+              <Component id="masterScrollPane" pref="127" max="32767" attributes="0"/>
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
               <EmptySpace min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="ingredienteIdLabel" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -222,6 +226,7 @@
               <Subbinding sourcePath="${medida}">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN" value="3"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
 =======
@@ -234,6 +239,11 @@
                 <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                 <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
 >>>>>>> origin/master
+=======
+                <BindingParameter name="NAME" value="Medida"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
               </Subbinding>
             </BindingProperty>
           </BindingProperties>
@@ -312,6 +322,7 @@
       <Properties>
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         <Property name="text" type="java.lang.String" value="Refresh"/>
 =======
         <Property name="text" type="java.lang.String" value="Recargar"/>
@@ -319,6 +330,9 @@
 =======
         <Property name="text" type="java.lang.String" value="Recargar"/>
 >>>>>>> origin/master
+=======
+        <Property name="text" type="java.lang.String" value="Recargar"/>
+>>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="refreshButtonActionPerformed"/>
