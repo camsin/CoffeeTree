@@ -4,21 +4,8 @@
   <NonVisualComponents>
     <Component class="GUI.InventarioModPanel" name="inventarioModPanel1">
     </Component>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     <Component class="GUI.InventarioModPanel" name="inventarioModPanel2">
     </Component>
->>>>>>> origin/master
-=======
-    <Component class="GUI.InventarioModPanel" name="inventarioModPanel2">
-    </Component>
->>>>>>> origin/master
-=======
-    <Component class="GUI.InventarioModPanel" name="inventarioModPanel2">
-    </Component>
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -57,29 +44,10 @@
         </Constraint>
       </Constraints>
     </Component>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-    <Component class="GUI.InventarioModPanel" name="inventarioModPanel2">
-      <Constraints>
-        <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="50" y="70" width="-1" height="-1"/>
-=======
-=======
->>>>>>> origin/master
-=======
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
     <Component class="GUI.InventarioModPanel" name="inventarioModPanel4">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="50" y="90" width="-1" height="-1"/>
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         </Constraint>
       </Constraints>
     </Component>

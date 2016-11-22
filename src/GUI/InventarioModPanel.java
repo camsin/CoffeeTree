@@ -69,29 +69,11 @@ public class InventarioModPanel extends JPanel {
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cantDisp}"));
         columnBinding.setColumnName("Cant Disp");
         columnBinding.setColumnClass(Double.class);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${medida}"));
-        columnBinding.setColumnName("Medida");
-        columnBinding.setColumnClass(String.class);
-=======
-=======
->>>>>>> origin/master
-=======
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${medida}"));
         columnBinding.setColumnName("Medida");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         masterScrollPane.setViewportView(masterTable);
@@ -128,28 +110,16 @@ public class InventarioModPanel extends JPanel {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), medidaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
-        saveButton.setText("Save");
+        saveButton.setText("Guardar");
         saveButton.addActionListener(formListener);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        refreshButton.setText("Refresh");
-=======
         refreshButton.setText("Recargar");
->>>>>>> origin/master
-=======
-        refreshButton.setText("Recargar");
->>>>>>> origin/master
-=======
-        refreshButton.setText("Recargar");
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
         refreshButton.addActionListener(formListener);
 
-        newButton.setText("New");
+        newButton.setText("Nuevo");
         newButton.addActionListener(formListener);
 
-        deleteButton.setText("Delete");
+        deleteButton.setText("Borrar");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), deleteButton, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
@@ -160,34 +130,8 @@ public class InventarioModPanel extends JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(newButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(deleteButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(refreshButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(saveButton)
-                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-<<<<<<< HEAD
-                    .addComponent(ingredienteIdLabel)
-                    .addComponent(nombreLabel)
-                    .addComponent(cantDispLabel)
-                    .addComponent(medidaLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ingredienteIdField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                    .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                    .addComponent(cantDispField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
-                    .addComponent(medidaField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
-=======
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(newButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -212,13 +156,6 @@ public class InventarioModPanel extends JPanel {
                                     .addComponent(ingredienteIdField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                                     .addComponent(nombreField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                                     .addComponent(cantDispField, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE))))))
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> origin/master
-=======
->>>>>>> origin/master
-=======
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addContainerGap())
         );
 
@@ -228,19 +165,7 @@ public class InventarioModPanel extends JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-=======
                 .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
->>>>>>> origin/master
-=======
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
->>>>>>> origin/master
-=======
-                .addComponent(masterScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingredienteIdLabel)
@@ -257,19 +182,7 @@ public class InventarioModPanel extends JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(medidaLabel)
                     .addComponent(medidaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-=======
                 .addGap(35, 35, 35)
->>>>>>> origin/master
-=======
-                .addGap(35, 35, 35)
->>>>>>> origin/master
-=======
-                .addGap(35, 35, 35)
->>>>>>> 27bc31451b3c2086d89808080059946e91edc58a
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(saveButton)
                     .addComponent(refreshButton)
