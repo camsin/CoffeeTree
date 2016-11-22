@@ -92,6 +92,8 @@ public class InventarioModPanel extends JPanel {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), ingredienteIdField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        ingredienteIdField.addKeyListener(formListener);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nombre}"), nombreField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
@@ -104,11 +106,18 @@ public class InventarioModPanel extends JPanel {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), cantDispField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
 
+        cantDispField.addKeyListener(formListener);
+
+        medidaField.setInheritsPopupMenu(true);
+
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.medida}"), medidaField, org.jdesktop.beansbinding.BeanProperty.create("text"));
         binding.setSourceUnreadableValue("null");
         bindingGroup.addBinding(binding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ, masterTable, org.jdesktop.beansbinding.ELProperty.create("${selectedElement != null}"), medidaField, org.jdesktop.beansbinding.BeanProperty.create("enabled"));
         bindingGroup.addBinding(binding);
+
+        medidaField.addActionListener(formListener);
+        medidaField.addKeyListener(formListener);
 
         saveButton.setText("Guardar");
         saveButton.addActionListener(formListener);
@@ -196,7 +205,7 @@ public class InventarioModPanel extends JPanel {
 
     // Code for dispatching events from components to event handlers.
 
-    private class FormListener implements java.awt.event.ActionListener {
+    private class FormListener implements java.awt.event.ActionListener, java.awt.event.KeyListener {
         FormListener() {}
         public void actionPerformed(java.awt.event.ActionEvent evt) {
             if (evt.getSource() == saveButton) {
@@ -210,6 +219,30 @@ public class InventarioModPanel extends JPanel {
             }
             else if (evt.getSource() == deleteButton) {
                 InventarioModPanel.this.deleteButtonActionPerformed(evt);
+            }
+            else if (evt.getSource() == medidaField) {
+                InventarioModPanel.this.medidaFieldActionPerformed(evt);
+            }
+        }
+
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            if (evt.getSource() == medidaField) {
+                InventarioModPanel.this.medidaFieldKeyPressed(evt);
+            }
+        }
+
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+        }
+
+        public void keyTyped(java.awt.event.KeyEvent evt) {
+            if (evt.getSource() == cantDispField) {
+                InventarioModPanel.this.cantDispFieldKeyTyped(evt);
+            }
+            else if (evt.getSource() == medidaField) {
+                InventarioModPanel.this.medidaFieldKeyTyped(evt);
+            }
+            else if (evt.getSource() == ingredienteIdField) {
+                InventarioModPanel.this.ingredienteIdFieldKeyTyped(evt);
             }
         }
     }// </editor-fold>//GEN-END:initComponents
@@ -253,10 +286,12 @@ public class InventarioModPanel extends JPanel {
     }//GEN-LAST:event_newButtonActionPerformed
     
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
+
         try {
             entityManager.getTransaction().commit();
             entityManager.getTransaction().begin();
         } catch (RollbackException rex) {
+            JOptionPane.showMessageDialog(null, "No se pueden repetir los id");
             rex.printStackTrace();
             entityManager.getTransaction().begin();
             List<GUI.Ingredientes> merged = new ArrayList<GUI.Ingredientes>(list.size());
@@ -266,7 +301,44 @@ public class InventarioModPanel extends JPanel {
             list.clear();
             list.addAll(merged);
         }
+        
+        
     }//GEN-LAST:event_saveButtonActionPerformed
+
+    private void medidaFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medidaFieldActionPerformed
+    
+    }//GEN-LAST:event_medidaFieldActionPerformed
+
+    private void medidaFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medidaFieldKeyPressed
+        
+    }//GEN-LAST:event_medidaFieldKeyPressed
+
+    private void cantDispFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cantDispFieldKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+            cantDispField.setText(null);
+
+        }
+    }//GEN-LAST:event_cantDispFieldKeyTyped
+
+    private void medidaFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_medidaFieldKeyTyped
+        char enter = evt.getKeyChar();
+        if((Character.isDigit(enter))){
+            evt.consume();
+            medidaField.setText(null);
+
+        }
+    }//GEN-LAST:event_medidaFieldKeyTyped
+
+    private void ingredienteIdFieldKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ingredienteIdFieldKeyTyped
+        char enter = evt.getKeyChar();
+        if(!(Character.isDigit(enter))){
+            evt.consume();
+            ingredienteIdField.setText(null);
+
+        }
+    }//GEN-LAST:event_ingredienteIdFieldKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

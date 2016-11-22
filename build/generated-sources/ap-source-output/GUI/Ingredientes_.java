@@ -6,12 +6,13 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-11-06T18:02:06")
+@Generated(value="EclipseLink-2.5.2.v20140319-rNA", date="2016-11-22T10:44:38")
 @StaticMetamodel(Ingredientes.class)
 public class Ingredientes_ { 
 
     public static volatile SingularAttribute<Ingredientes, Date> fechaPed;
     public static volatile SingularAttribute<Ingredientes, BigDecimal> ingredienteId;
+    public static volatile SingularAttribute<Ingredientes, String> medida;
     public static volatile SingularAttribute<Ingredientes, String> nombre;
     public static volatile SingularAttribute<Ingredientes, Double> cantDisp;
 
